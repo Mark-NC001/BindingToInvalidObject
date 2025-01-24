@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+						 xmlns:viewmodels="clr-namespace:BindingToInvalidObject.ViewModels;assembly=BindingToInvalidObject"
+             x:Class="BindingToInvalidObject.PersonPage"
+						 x:DataType="viewmodels:PersonViewModel"
+						 Title="PersonPage">
+	<VerticalStackLayout Margin="10">
+		<Grid ColumnDefinitions="Auto, *, Auto">
+			<Label Text="First Name:" VerticalTextAlignment="Center" />
+			<Entry Grid.Column="1" Text="{Binding FirstName}" />
+			<Button Grid.Column="2" Text="Clear Name" IsEnabled="{Binding HasName}" Clicked="ClearName_Clicked"/>
+		</Grid>
+		<Label Text="This page is bound to a PersonViewModel object."/>
+		<Label Text="By clicking the Delete toolbar item, the PersonViewModel gets flagged as deleted."/>
+		<Label Text="Navigation.PopModalAsync gets called and then the page should close." />
+		<Label Text="But in fact during the PopModalAsync, it ends up calling bound properties on" />
+		<Label Text="the PersonViewModel object!" />
+	</VerticalStackLayout>
+</ContentPage>
